@@ -46,6 +46,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	int scene = 0;
 
+	SceneManager* SceneMana = SceneManager::GetInstance();
+
 	//
 
 	// ゲームループ
@@ -54,7 +56,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		// 最新のキーボード情報だったものは1フレーム前のキーボード情報として保存
 		// 最新のキーボード情報を取得
 		InputUpdate();
-
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		// 画面クリア
 		ClearDrawScreen();
 		//---------  ここからプログラムを記述  ----------//
@@ -63,14 +65,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		if (GetPressKey(KEY_INPUT_SPACE))
 		{
-			scene++;
+			scene++;             
 		}
 		if (scene >= 3)
-		{
+		{                                                
 			scene = 0;
 		}
 
-		SceneManager::GetInstance()->ChangeScene(scene);
+		SceneMana->ChangeScene(scene);
 
 		// 描画処理
 		DrawFormatString(10, 10, 0xffffff, "SceneNum:%d", scene);
@@ -96,6 +98,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		}
 	}
 	// Dxライブラリ終了処理
+
+	
 	DxLib_End();
 
 	// 正常終了
