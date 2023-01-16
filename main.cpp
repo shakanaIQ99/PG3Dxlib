@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include"input.h"
+#include"SceneManager.h"
 
 
 // ウィンドウのタイトルに表示する文字列
@@ -43,6 +44,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	// ゲームループで使う変数の宣言
 
+	int scene = 0;
+
 	//
 
 	// ゲームループ
@@ -58,8 +61,20 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		// 更新処理
 
+		if (GetPressKey(KEY_INPUT_SPACE))
+		{
+			scene++;
+		}
+		if (scene >= 3)
+		{
+			scene = 0;
+		}
+
+		SceneManager::GetInstance()->ChangeScene(scene);
 
 		// 描画処理
+		DrawFormatString(10, 10, 0xffffff, "SceneNum:%d", scene);
+
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
