@@ -3,8 +3,6 @@
 #include"Player.h"
 #include"Enemy.h"
 
-bool Enemy::death=false;
-
 void Col(Transform a, Transform b);
 
 // ウィンドウのタイトルに表示する文字列
@@ -51,15 +49,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	Player player;
 
 	Enemy* enemy1 = new Enemy();
-	Enemy* enemy2 = new Enemy();
-	Enemy* enemy3 = new Enemy();
-
+	
 	player.Initialize();
 
 	enemy1->Initialize(100, 200, &player);
-	enemy2->Initialize(400, 200, &player);
-	enemy3->Initialize(300, 50, &player);
-
+	
 	//
 
 	// ゲームループ
@@ -76,13 +70,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		// 更新処理
 		player.Update();
 		enemy1->Update();
-		enemy2->Update();
-		enemy3->Update();
+		
 		// 描画処理
 		player.Draw();
 		enemy1->Draw();
-		enemy2->Draw();
-		enemy3->Draw();
+		
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
 		ScreenFlip();
@@ -106,8 +98,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	// Dxライブラリ終了処理
 	delete enemy1;
-	delete enemy2;
-	delete enemy3;
 	DxLib_End();
 
 	// 正常終了

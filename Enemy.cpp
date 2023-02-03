@@ -13,25 +13,43 @@ void Enemy::Initialize(int x, int y, Player* pl)
 
 void Enemy::Update()
 {
-	Vector2 EtoP = player->Gettrans().pos - trans.pos;
+	(this->*MoveTable[static_cast<size_t>(phese)])();
 
-	float EtoPlength = EtoP.length();
-
-	EtoP.normalize();
-
-	EtoP *= trans.r;
-
-	if (EtoPlength < EtoP.length() + EtoP.length())
+	timer--;
+	if (timer < 200)
 	{
-		death = true;
+		phese = Shot;
 	}
+	if (timer < 100)
+	{
+		phese = Secession;
+	}
+}
+
+void Enemy::Update1()
+{
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "‹ßÚ");
 
 }
 
+void Enemy::Update2()
+{
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "ŽËŒ‚");
+}
+
+void Enemy::Update3()
+{
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "—£’E");
+}
+
+void (Enemy::* Enemy::MoveTable[])() =
+{
+	&Enemy::Update1,
+	&Enemy::Update2,
+	&Enemy::Update3
+};
+
 void Enemy::Draw()
 {
-	if (!death)
-	{
-		DrawCircle(trans.pos.x, trans.pos.y, trans.r, GetColor(255, 0, 0));
-	}
+	DrawFormatString(0, 20, GetColor(255, 255, 255), "Timer::%d",timer);
 }
